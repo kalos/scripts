@@ -1,0 +1,8 @@
+#!/bin/bash
+
+btrfs_home=`mount -t btrfs | grep " /home " | cut -d " " -f 1` && \
+tmp=`mktemp -p /tmp -d bsnap-home-XXXX` && \
+sudo mount $btrfs_home $tmp && \
+sudo btrfs subvol snapshot $tmp/@ $tmp/@bsnap-home_`date '+%Y-%m-%d_%H.%M'`${1} && \
+sudo umount $tmp && \
+rmdir $tmp

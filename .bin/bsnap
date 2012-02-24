@@ -1,0 +1,8 @@
+#!/bin/bash
+
+pool_btrfs=`mount -t btrfs | grep " / " | cut -d " " -f 1` && \
+tmp=`mktemp -p /tmp -d bsnap-XXXX` && \
+sudo mount $pool_btrfs $tmp && \
+sudo btrfs subvol snapshot $tmp/@ $tmp/@bsnap_`date '+%Y-%m-%d_%H.%M'`${1} && \
+sudo umount $tmp && \
+rmdir $tmp
