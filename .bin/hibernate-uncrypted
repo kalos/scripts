@@ -1,0 +1,17 @@
+#!/bin/bash
+
+DEVMAPDEVICE=cswap
+SWAPDEVICE=/dev/sda3
+
+swapoff -a
+cryptdisks_stop $DEVMAPDEVICE
+mkswap $SWAPDEVICE
+swapon $SWAPDEVICE
+sleep 5s
+
+#/usr/sbin/s2disk
+/usr/share/laptop-mode-tools/module-helpers/pm-hibernate
+
+swapoff $SWAPDEVICE
+cryptdisks_start $DEVMAPDEVICE
+swapon -a
