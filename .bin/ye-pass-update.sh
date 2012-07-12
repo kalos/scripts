@@ -32,7 +32,11 @@ echo
 sudo ykpersonalize -2 -ofixed=ichrigifhv -osend-ref -o-man-update -y
 
 # decrypt ecryptfs mount passphrase
-mount_pass=$(echo $old_pass | ecryptfs-unwrap-passphrase ~/.ecryptfs/wrapped-passphrase -)
+mount_pass=$(echo -E "$old_pass" | ecryptfs-unwrap-passphrase ~/.ecryptfs/wrapped-passphrase -)
+
+echo
+echo "save mount pass in $YBAK"
+sudo su -c "echo $mount_pass >> $YBAK"
 
 # insert new password
 echo
@@ -53,7 +57,7 @@ echo "change unix user password"
 sudo su -c "echo $USER:$new_pass | chpasswd"
 
 # crypt ecryptfs mount passphrase
-echo -e "$mount_pass\n$new_pass" | ecryptfs-wrap-passphrase ~/.ecryptfs/wrapped-passphrase > /dev/null
+printf "%s\n%s" "$mount_pass" "$new_pass" | ecryptfs-wrap-passphrase ~/.ecryptfs/wrapped-passphrase > /dev/null
 
 # backup passwords
 echo
