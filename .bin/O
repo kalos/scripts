@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# launcher for openarena
+
+xgamma -gamma 1.6
+openarena +set r_fullscreen 1
+xgamma -gamma 1.0
+
+xrandr --output LVDS1 --auto --output HDMI2 --auto --left-of LVDS1
