@@ -1,11 +1,4 @@
 #!/bin/sh
-
-# grabbed from: https://github.com/knu/git-info
-#
-# Copyright (c) 2009, 2012 Akinori MUSHA.
-# Licensed under the 2-clause BSD license. See LICENSE.txt for further details.
-#
-#
 #
 # git-info - shows information about a Git repository a la `svn info'
 #
